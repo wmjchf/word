@@ -1,0 +1,181 @@
+.index {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  .main-content {
+    min-height: 100vh;
+    
+    .header {
+      background: transparent;
+      padding: 40px 32px;
+      color: white;
+      text-align: center;
+
+      .title {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 16px;
+        display: block;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .subtitle {
+        font-size: 28px;
+        opacity: 0.9;
+        display: block;
+      }
+    }
+
+    .content-wrapper {
+      background: white;
+      border-radius: 40px 40px 0 0;
+      padding: 40px 32px 120px;
+      margin-top: -20px;
+      position: relative;
+      z-index: 1;
+
+      .section-title {
+        font-size: 36px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 24px;
+        display: block;
+      }
+
+      .quick-start {
+        margin-bottom: 48px;
+
+        .start-btn {
+          width: 100%;
+          height: 100px;
+          background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+          color: white;
+          border: none;
+          border-radius: 20px;
+          font-size: 32px;
+          font-weight: 600;
+          box-shadow: 0 8px 24px rgba(79, 172, 254, 0.3);
+          
+          &:active {
+            transform: translateY(2px);
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+          }
+        }
+      }
+
+      .current-progress {
+        margin-bottom: 48px;
+        padding: 24px;
+        background: #f8f9ff;
+        border-radius: 16px;
+        border-left: 8px solid #4facfe;
+
+        .progress-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          
+          .progress-text {
+            font-size: 28px;
+            color: #666;
+          }
+
+          .continue-btn {
+            background: #4facfe;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 24px;
+            font-size: 24px;
+            
+            &:active {
+              background: #3d8bfe;
+            }
+          }
+        }
+      }
+
+      .features {
+        margin-bottom: 48px;
+
+        .feature-list {
+          .feature-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 24px 0;
+            border-bottom: 1px solid #f0f0f0;
+
+            &:last-child {
+              border-bottom: none;
+            }
+
+            .feature-icon {
+              font-size: 48px;
+              margin-right: 24px;
+              flex-shrink: 0;
+            }
+
+            .feature-text {
+              flex: 1;
+
+              .feature-title {
+                font-size: 32px;
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 8px;
+                display: block;
+              }
+
+              .feature-desc {
+                font-size: 26px;
+                color: #666;
+                line-height: 1.5;
+                display: block;
+              }
+            }
+          }
+        }
+      }
+
+      .settings-section {
+        text-align: center;
+        padding-top: 24px;
+        border-top: 1px solid #f0f0f0;
+
+        .settings-btn {
+          width: 100%;
+          height: 80px;
+          background: white;
+          color: #4facfe;
+          border: 2px solid #4facfe;
+          border-radius: 16px;
+          font-size: 28px;
+          font-weight: 600;
+          margin-bottom: 16px;
+          
+          &:active {
+            background: #f8f9ff;
+          }
+        }
+
+        .settings-info {
+          font-size: 24px;
+          color: #999;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+/* 按钮通用样式 */
+.primary {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+.secondary {
+  background: white;
+  color: #4facfe;
+  border: 2px solid #4facfe;
+}

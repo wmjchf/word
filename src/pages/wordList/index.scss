@@ -1,0 +1,282 @@
+.word-list {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-bottom: 120px;
+
+  .header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 32px 40px;
+    color: white;
+    text-align: center;
+
+    .title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      display: block;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      font-size: 28px;
+      opacity: 0.9;
+      display: block;
+    }
+  }
+
+  .add-section {
+    background: white;
+    padding: 32px;
+    border-bottom: 1px solid #e9ecef;
+
+    .input-group {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+
+      .word-input {
+        flex: 1;
+        height: 80px;
+        padding: 0 20px;
+        border: 2px solid #e9ecef;
+        border-radius: 16px;
+        font-size: 28px;
+        background: #f8f9fa;
+
+        &:focus {
+          border-color: #4facfe;
+          background: white;
+        }
+      }
+
+      .add-btn {
+        width: 120px;
+        height: 80px;
+        background: #4facfe;
+        color: white;
+        border: none;
+        border-radius: 16px;
+        font-size: 28px;
+        font-weight: 600;
+
+        &:disabled {
+          background: #ccc;
+          color: #999;
+        }
+
+        &:not(:disabled):active {
+          background: #3d8bfe;
+        }
+      }
+    }
+  }
+
+  .words-section {
+    background: white;
+    min-height: 400px;
+
+    .words-container {
+      padding: 0 32px;
+
+      .word-item {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 24px 0;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .display-mode {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .word-text {
+            font-size: 32px;
+            font-weight: 500;
+            color: #333;
+            flex: 1;
+          }
+
+          .word-actions {
+            display: flex;
+            gap: 12px;
+
+            .edit-btn, .delete-btn {
+              padding: 12px 20px;
+              border-radius: 12px;
+              font-size: 24px;
+              font-weight: 500;
+            }
+
+            .edit-btn {
+              background: #f0f8ff;
+              color: #4facfe;
+              border: 1px solid #4facfe;
+
+              &:active {
+                background: #e6f3ff;
+              }
+            }
+
+            .delete-btn {
+              background: #fff5f5;
+              color: #e53e3e;
+              border: 1px solid #e53e3e;
+
+              &:active {
+                background: #fed7d7;
+              }
+            }
+          }
+        }
+
+        .edit-mode {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+
+          .edit-input {
+            flex: 1;
+            height: 60px;
+            padding: 0 16px;
+            border: 2px solid #4facfe;
+            border-radius: 12px;
+            font-size: 28px;
+            background: white;
+          }
+
+          .save-btn, .cancel-btn {
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 500;
+          }
+
+          .save-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+
+            &:active {
+              background: #38a169;
+            }
+          }
+
+          .cancel-btn {
+            background: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #e2e8f0;
+
+            &:active {
+              background: #edf2f7;
+            }
+          }
+        }
+      }
+    }
+
+    .empty-state {
+      padding: 80px 32px;
+      text-align: center;
+
+      .empty-icon {
+        font-size: 120px;
+        margin-bottom: 32px;
+        opacity: 0.5;
+        display: block;
+      }
+
+      .empty-text {
+        font-size: 36px;
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      .empty-tip {
+        font-size: 28px;
+        color: #999;
+        line-height: 1.5;
+        display: block;
+      }
+    }
+  }
+
+  .bottom-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 24px 32px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    gap: 16px;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+
+    .clear-btn {
+      flex: 1;
+      height: 80px;
+      background: white;
+      color: #e53e3e;
+      border: 2px solid #e53e3e;
+      border-radius: 16px;
+      font-size: 28px;
+      font-weight: 600;
+
+      &:active {
+        background: #fff5f5;
+      }
+    }
+
+    .generate-btn {
+      flex: 2;
+      height: 80px;
+      background: #4facfe;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 28px;
+      font-weight: 600;
+
+      &.disabled {
+        background: #ccc;
+        color: #999;
+      }
+
+      &:not(.disabled):active {
+        background: #3d8bfe;
+      }
+    }
+  }
+
+  .tips-section {
+    background: white;
+    margin-top: 16px;
+    padding: 32px;
+
+    .tips-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .tips-list {
+      .tip-item {
+        font-size: 26px;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 12px;
+        display: block;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+} 

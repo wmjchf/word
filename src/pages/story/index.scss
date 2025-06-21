@@ -1,0 +1,259 @@
+.story {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-bottom: 120px;
+
+  .header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 32px 40px;
+    color: white;
+    text-align: center;
+
+    .title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      display: block;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      font-size: 28px;
+      opacity: 0.9;
+      display: block;
+    }
+  }
+
+  .loading-section {
+    padding: 80px 32px;
+    text-align: center;
+    background: white;
+    margin: 16px;
+    border-radius: 16px;
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #4facfe;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 24px;
+    }
+
+    .loading-text {
+      font-size: 36px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .loading-tip {
+      font-size: 28px;
+      color: #666;
+      display: block;
+    }
+  }
+
+  .error-section {
+    padding: 80px 32px;
+    text-align: center;
+    background: white;
+    margin: 16px;
+    border-radius: 16px;
+
+    .error-icon {
+      font-size: 120px;
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .error-text {
+      font-size: 32px;
+      color: #e53e3e;
+      margin-bottom: 32px;
+      display: block;
+      line-height: 1.5;
+    }
+
+    .retry-btn {
+      width: 200px;
+      height: 80px;
+      background: #4facfe;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 28px;
+      font-weight: 600;
+
+      &:active {
+        background: #3d8bfe;
+      }
+    }
+  }
+
+  .story-section {
+    background: white;
+    margin: 16px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    .story-container {
+      padding: 32px;
+      line-height: 1.8;
+      font-size: 30px;
+
+      .story-content {
+        .story-text {
+          color: #333;
+        }
+
+        .highlighted-word {
+          color: #4facfe;
+          background: #f0f8ff;
+          padding: 4px 8px;
+          border-radius: 8px;
+          margin: 0 2px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:active {
+            background: #e6f3ff;
+            transform: scale(1.05);
+          }
+
+          &.selected {
+            background: #4facfe;
+            color: white;
+          }
+        }
+      }
+    }
+
+    .definition-section {
+      margin: 0 32px;
+      padding: 24px;
+      background: #f8f9ff;
+      border-radius: 12px;
+      border-left: 4px solid #4facfe;
+
+      .definition-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #4facfe;
+        margin-bottom: 12px;
+        display: block;
+      }
+
+      .definition-content {
+        font-size: 26px;
+        color: #666;
+        line-height: 1.6;
+        white-space: pre-line;
+      }
+    }
+
+    .controls {
+      padding: 32px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      .control-btn {
+        flex: 1;
+        min-width: 120px;
+        height: 60px;
+        background: white;
+        color: #4facfe;
+        border: 2px solid #4facfe;
+        border-radius: 12px;
+        font-size: 24px;
+        font-weight: 500;
+
+        &:active {
+          background: #f8f9ff;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          color: #ccc;
+          border-color: #ccc;
+        }
+
+        &[loading] {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .bottom-actions {
+      padding: 32px;
+      display: flex;
+      gap: 16px;
+      border-top: 1px solid #f0f0f0;
+
+      .action-btn {
+        flex: 1;
+        height: 80px;
+        border-radius: 16px;
+        font-size: 28px;
+        font-weight: 600;
+
+        &.primary {
+          background: #4facfe;
+          color: white;
+          border: none;
+
+          &:active {
+            background: #3d8bfe;
+          }
+        }
+
+        &.secondary {
+          background: white;
+          color: #4facfe;
+          border: 2px solid #4facfe;
+
+          &:active {
+            background: #f8f9ff;
+          }
+        }
+      }
+    }
+
+    .tips-section {
+      padding: 32px;
+      background: #f8f9fa;
+
+      .tips-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .tips-list {
+        .tip-item {
+          font-size: 26px;
+          color: #666;
+          line-height: 1.6;
+          margin-bottom: 12px;
+          display: block;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} 
