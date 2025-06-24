@@ -37,9 +37,9 @@ export const authService = {
   // 微信登录
   wechatLogin: async (code: string) => {
     try {
-      const response = await request('/wordlings/sso/wechat/login', {
+      const response = await request('/sso/login/wechat', {
         method: 'GET',
-        url: `${BASE_URL}/wordlings/sso/wechat/login?code=${code}`
+        url: `${BASE_URL}/sso/login/wechat?code=${code}&appName=wordlings`
       })
       
       if (response.code === 200) {
@@ -75,9 +75,9 @@ export const authService = {
         throw new Error('No refresh token')
       }
       
-      const response = await request('/wordlings/sso/refreshToken', {
+      const response = await request('/sso/login/refreshToken', {
         method: 'GET',
-        url: `${BASE_URL}/wordlings/sso/refreshToken?refreshToken=${refreshToken}`
+        url: `${BASE_URL}/sso/login/refreshToken?refreshToken=${refreshToken}`
       })
       
       if (response.code === 200) {
