@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { View, Text, Button, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { pictureService } from '../../services/api'
+import { pictureService, createWebSocketManager } from '../../services/api'
 import { store } from '../../store'
 import CustomNavBar from '../../components/CustomNavBar'
 import { useNavBarHeight } from '../../hooks/useNavBarHeight'
@@ -19,7 +19,7 @@ export default function Camera() {
   
   // 使用ref来避免在websocket回调中访问状态导致的依赖问题
   const isReceivingDataRef = useRef(false)
-  const socketTaskRef = useRef<Taro.SocketTask | null>(null)
+  const wsManagerRef = useRef<any>(null)
   
   // 同步状态到ref
   useEffect(() => {
@@ -28,51 +28,49 @@ export default function Camera() {
 
   // 页面加载时连接WebSocket
   useEffect(() => {
-    Taro.connectSocket({
-      url: 'wss://wobufang.com//notice/ws/wordlings',
-      header: {
-        // 可带token等
-        accessToken: `${Taro.getStorageSync('accessToken')}`
+    // 创建WebSocket管理器
+    const wsManager = createWebSocketManager('wss://wobufang.com//notice/ws/wordlings')
+    wsManagerRef.current = wsManager
+    
+    // 设置事件监听器
+    wsManager.onOpen(() => {
+      console.log('WebSocket opened')
+      setWsConnected(true)
+      setError('')
+    })
+    
+    wsManager.onMessage((messageRes) => {
+      console.log(messageRes, 'messageRes')
+      
+      // 只有在接收数据状态时才处理消息
+      if (isReceivingDataRef.current && messageRes.data) {
+        const data = typeof messageRes.data === 'string' ? messageRes.data : JSON.stringify(messageRes.data)
+        setStreamData(prev => prev + data)
       }
-    }).then(res => {
-      socketTaskRef.current = res
-      
-      res.onMessage((messageRes) => {
-        console.log(messageRes, 'messageRes')
-        
-        // 只有在接收数据状态时才处理消息
-        if (isReceivingDataRef.current && messageRes.data) {
-          const data = typeof messageRes.data === 'string' ? messageRes.data : JSON.stringify(messageRes.data)
-          setStreamData(prev => prev + data)
-        }
-      })
-      
-      res.onClose(() => {
-        console.log('WebSocket closed')
-        setWsConnected(false)
-        setIsReceivingData(false)
-      })
-      
-      res.onError((err) => {
-        console.log('WebSocket error', err)
-        setWsConnected(false)
-        setError('WebSocket连接失败')
-      })
-      
-      res.onOpen(() => {
-        console.log('WebSocket opened')
-        setWsConnected(true)
-        setError('')
-      })
-    }).catch(err => {
+    })
+    
+    wsManager.onClose(() => {
+      console.log('WebSocket closed')
+      setWsConnected(false)
+      setIsReceivingData(false)
+    })
+    
+    wsManager.onError((err) => {
+      console.log('WebSocket error', err)
+      setWsConnected(false)
+      setError('WebSocket连接失败')
+    })
+    
+    // 初始连接
+    wsManager.connect().catch(err => {
       console.error('WebSocket连接失败:', err)
       setError('无法建立WebSocket连接')
     })
     
     // 清理WebSocket连接
     return () => {
-      if (socketTaskRef.current) {
-        // socketTaskRef.current.close()
+      if (wsManagerRef.current) {
+        wsManagerRef.current.close()
       }
     }
   }, [])
@@ -215,6 +213,24 @@ export default function Camera() {
       return '未连接'
     }
   }
+  
+  // 手动重连WebSocket（调试用）
+  const handleReconnectWebSocket = async () => {
+    if (wsManagerRef.current) {
+      try {
+        await wsManagerRef.current.reconnectWithNewToken()
+        Taro.showToast({
+          title: 'WebSocket重连成功',
+          icon: 'success'
+        })
+      } catch (error) {
+        Taro.showToast({
+          title: 'WebSocket重连失败',
+          icon: 'error'
+        })
+      }
+    }
+  }
 
   return (
     <View className='camera'>
@@ -249,6 +265,17 @@ export default function Camera() {
                 <Text className='tip-icon'>🔗</Text>
                 <Text className='tip-text'>连接状态: {getWebSocketStatusText()}</Text>
               </View>
+              {!wsConnected && (
+                <View className='tip-item'>
+                  <Button 
+                    className='reconnect-btn'
+                    size='mini'
+                    onClick={handleReconnectWebSocket}
+                  >
+                    🔄 重连WebSocket
+                  </Button>
+                </View>
+              )}
             </View>
 
             <View className='camera-actions'>
