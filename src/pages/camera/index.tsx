@@ -29,7 +29,7 @@ export default function Camera() {
   // 页面加载时连接WebSocket
   useEffect(() => {
     Taro.connectSocket({
-      url: 'ws://120.27.154.116/wordlings/ws',
+      url: 'wss://120.55.15.4/notice/ws/wordlings',
       header: {
         // 可带token等
         accessToken: `${Taro.getStorageSync('accessToken')}`
